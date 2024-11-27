@@ -8,19 +8,26 @@
         xmlns:c="clr-namespace:customtoolbartype.Helpers"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        xmlns:self="clr-namespace:customtoolbartype"
         mc:Ignorable="d"
        
         Title="MainWindow" Height="450" Width="800" Name="wnd"
         >
     <Window.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Cut" CanExecute="CutCommand_CanExecute" Executed="CutCommand_Executed" />
-        <CommandBinding Command="ApplicationCommands.Paste" CanExecute="PasteCommand_CanExecute" Executed="PasteCommand_Executed" />
+        <CommandBinding Command="self:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed" />
     </Window.CommandBindings>
-    <DockPanel>
-        <WrapPanel DockPanel.Dock="Top" Margin="3">
-            <Button Command="ApplicationCommands.Cut" Width="60">_Cut</Button>
-            <Button Command="ApplicationCommands.Paste" Width="60" Margin="3,0">_Paste</Button>
-        </WrapPanel>
-        <TextBox AcceptsReturn="True" Name="txtEditor" />
-    </DockPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Command="self:CustomCommands.Exit" />
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Command="self:CustomCommands.Exit">Exit</Button>
+        </StackPanel>
+    </Grid>
 </Window>
