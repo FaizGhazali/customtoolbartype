@@ -7,19 +7,16 @@
         xmlns:Helper="clr-namespace:customtoolbartype.Helpers"
         xmlns:c="clr-namespace:customtoolbartype.Helpers"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+       
+        Title="MainWindow" Height="450" Width="800" Name="wnd"
         >
     <Window.Resources>
-        <local:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />
+        <local:DebugDummyConverter x:Key="DebugDummyConverter" />
     </Window.Resources>
-    <StackPanel Margin="10">
-        <TextBox Name="txtValue" />
-        <WrapPanel Margin="0,10">
-            <TextBlock Text="Current value is: " />
-            <TextBlock Text="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}"></TextBlock>
-        </WrapPanel>
-        <CheckBox IsChecked="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}" Content="Yes" />
-    </StackPanel>
+    <Grid Margin="10">
+        <TextBlock Text="{Binding Title, ElementName=wnd, Converter={StaticResource DebugDummyConverter}}" />
+    </Grid>
 
 </Window>
