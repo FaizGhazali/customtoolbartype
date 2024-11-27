@@ -20,56 +20,39 @@ namespace customtoolbartype
     public partial class MainWindow : Window
     {
         //private List<User> users = new List<User>();
-        private ObservableCollection<User> users = new ObservableCollection<User>();
+        
         public MainWindow()
         {
             InitializeComponent();
-            users.Add(new User() { Name = "John Doe" });
-            users.Add(new User() { Name = "Jane Doe" });
-
-            lbUsers.ItemsSource = users;
         }
-
-        private void btnAddUser_Click(object sender, RoutedEventArgs e)
-        {
-            users.Add(new User() { Name = "New user" });
-        }
-
-        private void btnChangeUser_Click(object sender, RoutedEventArgs e)
-        {
-            if (lbUsers.SelectedItem != null)
-                (lbUsers.SelectedItem as User).Name = "Random Name";
-        }
-
-        private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
-        {
-            if (lbUsers.SelectedItem != null)
-                users.Remove(lbUsers.SelectedItem as User);
-        }
-
     }
-    public class User : INotifyPropertyChanged
+
+    public class YesNoToBooleanConverter : IValueConverter
     {
-        private string name;
-        public string Name
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            get { return this.name; }
-            set
+            switch (value.ToString().ToLower())
             {
-                if (this.name != value)
-                {
-                    this.name = value;
-                    this.NotifyPropertyChanged("Name");
-                }
+                case "yes":
+                case "oui":
+                    return true;
+                case "no":
+                case "non":
+                    return false;
             }
+            return false;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(string propName)
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            if (value is bool)
+            {
+                if ((bool)value == true)
+                    return "yes";
+                else
+                    return "no";
+            }
+            return "no";
         }
     }
 }
