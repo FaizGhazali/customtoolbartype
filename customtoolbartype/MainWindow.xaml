@@ -13,21 +13,38 @@
        
         Title="MainWindow" Height="450" Width="800" Name="wnd"
         >
-    <Window.CommandBindings>
-        <CommandBinding Command="self:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed" />
-    </Window.CommandBindings>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Header="File">
-                <MenuItem Command="self:CustomCommands.Exit" />
-            </MenuItem>
-        </Menu>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Command="self:CustomCommands.Exit">Exit</Button>
-        </StackPanel>
+    <Grid Margin="10">
+        <DataGrid Name="dgUsers" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DockPanel Background="GhostWhite">
+                        <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10" />
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="ID: " FontWeight="Bold" />
+                            <TextBlock Text="{Binding Id}" Grid.Column="1" />
+                            <TextBlock Text="Name: " FontWeight="Bold" Grid.Row="1" />
+                            <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.Row="1" />
+                            <TextBlock Text="Birthday: " FontWeight="Bold" Grid.Row="2" />
+                            <TextBlock Text="{Binding Birthday, StringFormat=d}" Grid.Column="1" Grid.Row="2" />
+
+                        </Grid>
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
     </Grid>
 </Window>
