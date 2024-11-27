@@ -12,11 +12,12 @@
        
         Title="MainWindow" Height="450" Width="800" Name="wnd"
         >
-    <Window.Resources>
-        <local:DebugDummyConverter x:Key="DebugDummyConverter" />
-    </Window.Resources>
-    <Grid Margin="10">
-        <TextBlock Text="{Binding Title, ElementName=wnd, Converter={StaticResource DebugDummyConverter}}" />
-    </Grid>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
+    </Window.CommandBindings>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Command="ApplicationCommands.New">New</Button>
+    </StackPanel>
 
 </Window>

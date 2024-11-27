@@ -26,20 +26,15 @@ namespace customtoolbartype
         {
             InitializeComponent();
         }
-    }
 
-    public class DebugDummyConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            Debugger.Break();
-            return value;
+            e.CanExecute = true;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Debugger.Break();
-            return value;
+            MessageBox.Show("The New command was invoked");
         }
     }
 }
